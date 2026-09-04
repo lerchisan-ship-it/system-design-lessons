@@ -1,0 +1,398 @@
+{
+    "item": [
+        {
+            "id": "a6fd7c60-8e47-487c-9fe8-1d1abe04db3d",
+            "name": "getPatients",
+            "request": {
+                "description": {
+                    "content": "",
+                    "type": "text/plain"
+                },
+                "url": {
+                    "path": [
+                        "vet",
+                        "PatientService"
+                    ],
+                    "host": [
+                        "{{PatientServiceSoapPortBaseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "text/xml; charset=utf-8"
+                    },
+                    {
+                        "key": "SOAPAction",
+                        "value": "http://example.com/vet/patients/getPatients"
+                    }
+                ],
+                "method": "POST",
+                "body": {
+                    "mode": "raw",
+                    "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:getPatientsRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:animalType>DOG</tns:animalType>\n    </tns:getPatientsRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "options": {
+                        "raw": {
+                            "language": "xml"
+                        }
+                    }
+                }
+            },
+            "response": [
+                {
+                    "id": "a5633c90-cabf-444a-acbe-444d32d4dac7",
+                    "name": "getPatients response",
+                    "originalRequest": {
+                        "url": {
+                            "protocol": "https",
+                            "path": [
+                                "vet",
+                                "PatientService"
+                            ],
+                            "host": [
+                                "example",
+                                "com"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "text/xml; charset=utf-8"
+                            },
+                            {
+                                "key": "SOAPAction",
+                                "value": "http://example.com/vet/patients/getPatients"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:getPatientsRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:animalType>DOG</tns:animalType>\n    </tns:getPatientsRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                            "options": {
+                                "raw": {
+                                    "language": "xml"
+                                }
+                            }
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "text/xml; charset=utf-8"
+                        }
+                    ],
+                    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:getPatientsResponse xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:patients>\n        <tns:patient>\n          <tns:id>Dd5F7d74-bdd8-5fFD-9a43-F01e328dF3DF</tns:id>\n          <tns:ownerName>s..</tns:ownerName>\n          <tns:petName>s</tns:petName>\n          <tns:animalType>DOG</tns:animalType>\n          <tns:passportNumber>UJ-390770</tns:passportNumber>\n        </tns:patient>\n      </tns:patients>\n    </tns:getPatientsResponse>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "cookie": [],
+                    "_postman_previewlanguage": "xml"
+                },
+                {
+                    "id": "2a2c6b6c-45e1-4bf6-9c09-d637ef78a401",
+                    "name": "getPatients - CLIENT_ERROR",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "vet",
+                                "PatientService"
+                            ],
+                            "host": [
+                                "{{PatientServiceSoapPortBaseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "text/xml; charset=utf-8"
+                            },
+                            {
+                                "key": "SOAPAction",
+                                "value": "http://example.com/vet/patients/getPatients"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:getPatientsRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:animalType>DRAGON</tns:animalType>\n    </tns:getPatientsRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                            "options": {
+                                "raw": {
+                                    "language": "xml"
+                                }
+                            }
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "text/xml; charset=utf-8"
+                        }
+                    ],
+                    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tns=\"http://example.com/vet/patients\">\n  <soap:Body>\n    <soap:Fault>\n      <faultcode>CLIENT_ERROR</faultcode>\n      <faultstring>Validation error</faultstring>\n      <detail>\n        <tns:serviceFault>\n          <tns:faultCode>CLIENT_ERROR</tns:faultCode>\n          <tns:message>Unsupported animalType value: DRAGON</tns:message>\n        </tns:serviceFault>\n      </detail>\n    </soap:Fault>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "cookie": [],
+                    "_postman_previewlanguage": "xml"
+                },
+                {
+                    "id": "4b7d774e-6af7-4fae-a573-6e104a2bc402",
+                    "name": "getPatients - SERVER_ERROR",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "vet",
+                                "PatientService"
+                            ],
+                            "host": [
+                                "{{PatientServiceSoapPortBaseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "text/xml; charset=utf-8"
+                            },
+                            {
+                                "key": "SOAPAction",
+                                "value": "http://example.com/vet/patients/getPatients"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:getPatientsRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:animalType>DOG</tns:animalType>\n    </tns:getPatientsRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                            "options": {
+                                "raw": {
+                                    "language": "xml"
+                                }
+                            }
+                        }
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "text/xml; charset=utf-8"
+                        }
+                    ],
+                    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tns=\"http://example.com/vet/patients\">\n  <soap:Body>\n    <soap:Fault>\n      <faultcode>SERVER_ERROR</faultcode>\n      <faultstring>Internal server error</faultstring>\n      <detail>\n        <tns:serviceFault>\n          <tns:faultCode>SERVER_ERROR</tns:faultCode>\n          <tns:message>The request could not be processed</tns:message>\n        </tns:serviceFault>\n      </detail>\n    </soap:Fault>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "cookie": [],
+                    "_postman_previewlanguage": "xml"
+                }
+            ],
+            "event": []
+        },
+        {
+            "id": "1c36a2ac-bf7e-4f59-9017-7e6b69569818",
+            "name": "registerPatient",
+            "request": {
+                "description": {
+                    "content": "",
+                    "type": "text/plain"
+                },
+                "url": {
+                    "path": [
+                        "vet",
+                        "PatientService"
+                    ],
+                    "host": [
+                        "{{PatientServiceSoapPortBaseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": []
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "text/xml; charset=utf-8"
+                    },
+                    {
+                        "key": "SOAPAction",
+                        "value": "http://example.com/vet/patients/registerPatient"
+                    }
+                ],
+                "method": "POST",
+                "body": {
+                    "mode": "raw",
+                    "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:registerPatientRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:patient>\n        <tns:ownerName>s..</tns:ownerName>\n        <tns:petName>s</tns:petName>\n        <tns:animalType>DOG</tns:animalType>\n        <tns:passportNumber>TI-823326</tns:passportNumber>\n      </tns:patient>\n    </tns:registerPatientRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "options": {
+                        "raw": {
+                            "language": "xml"
+                        }
+                    }
+                }
+            },
+            "response": [
+                {
+                    "id": "84e617c9-acb1-400f-a42b-b901bbe2e567",
+                    "name": "registerPatient response",
+                    "originalRequest": {
+                        "url": {
+                            "protocol": "https",
+                            "path": [
+                                "vet",
+                                "PatientService"
+                            ],
+                            "host": [
+                                "example",
+                                "com"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "text/xml; charset=utf-8"
+                            },
+                            {
+                                "key": "SOAPAction",
+                                "value": "http://example.com/vet/patients/registerPatient"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:registerPatientRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:patient>\n        <tns:ownerName>s..</tns:ownerName>\n        <tns:petName>s</tns:petName>\n        <tns:animalType>DOG</tns:animalType>\n        <tns:passportNumber>TI-823326</tns:passportNumber>\n      </tns:patient>\n    </tns:registerPatientRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                            "options": {
+                                "raw": {
+                                    "language": "xml"
+                                }
+                            }
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "text/xml; charset=utf-8"
+                        }
+                    ],
+                    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:registerPatientResponse xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:registeredPatient>\n        <tns:id>4079C5f0-A8FF-A7aA-8A8a-4cedFCE9830B</tns:id>\n        <tns:ownerName>s..</tns:ownerName>\n        <tns:petName>s</tns:petName>\n        <tns:animalType>DOG</tns:animalType>\n        <tns:passportNumber>RJ-638673</tns:passportNumber>\n      </tns:registeredPatient>\n    </tns:registerPatientResponse>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "cookie": [],
+                    "_postman_previewlanguage": "xml"
+                },
+                {
+                    "id": "98ba0b20-3c0f-4f55-9cb7-11a92e37d403",
+                    "name": "registerPatient - CLIENT_ERROR",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "vet",
+                                "PatientService"
+                            ],
+                            "host": [
+                                "{{PatientServiceSoapPortBaseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "text/xml; charset=utf-8"
+                            },
+                            {
+                                "key": "SOAPAction",
+                                "value": "http://example.com/vet/patients/registerPatient"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:registerPatientRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:patient>\n        <tns:ownerName>s..</tns:ownerName>\n        <tns:petName>s</tns:petName>\n        <tns:animalType>DRAGON</tns:animalType>\n        <tns:passportNumber>TI-823326</tns:passportNumber>\n      </tns:patient>\n    </tns:registerPatientRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                            "options": {
+                                "raw": {
+                                    "language": "xml"
+                                }
+                            }
+                        }
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "text/xml; charset=utf-8"
+                        }
+                    ],
+                    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tns=\"http://example.com/vet/patients\">\n  <soap:Body>\n    <soap:Fault>\n      <faultcode>CLIENT_ERROR</faultcode>\n      <faultstring>Validation error</faultstring>\n      <detail>\n        <tns:serviceFault>\n          <tns:faultCode>CLIENT_ERROR</tns:faultCode>\n          <tns:message>Unsupported animalType value: DRAGON</tns:message>\n        </tns:serviceFault>\n      </detail>\n    </soap:Fault>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "cookie": [],
+                    "_postman_previewlanguage": "xml"
+                },
+                {
+                    "id": "c15d8e8a-b6e9-4a34-a977-98f3bb79e404",
+                    "name": "registerPatient - SERVER_ERROR",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "vet",
+                                "PatientService"
+                            ],
+                            "host": [
+                                "{{PatientServiceSoapPortBaseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": []
+                        },
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "text/xml; charset=utf-8"
+                            },
+                            {
+                                "key": "SOAPAction",
+                                "value": "http://example.com/vet/patients/registerPatient"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <tns:registerPatientRequest xmlns:tns=\"http://example.com/vet/patients\">\n      <tns:patient>\n        <tns:ownerName>s..</tns:ownerName>\n        <tns:petName>s</tns:petName>\n        <tns:animalType>DOG</tns:animalType>\n        <tns:passportNumber>TI-823326</tns:passportNumber>\n      </tns:patient>\n    </tns:registerPatientRequest>\n  </soap:Body>\n</soap:Envelope>\n",
+                            "options": {
+                                "raw": {
+                                    "language": "xml"
+                                }
+                            }
+                        }
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                        {
+                            "key": "Content-Type",
+                            "value": "text/xml; charset=utf-8"
+                        }
+                    ],
+                    "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tns=\"http://example.com/vet/patients\">\n  <soap:Body>\n    <soap:Fault>\n      <faultcode>SERVER_ERROR</faultcode>\n      <faultstring>Internal server error</faultstring>\n      <detail>\n        <tns:serviceFault>\n          <tns:faultCode>SERVER_ERROR</tns:faultCode>\n          <tns:message>The request could not be processed</tns:message>\n        </tns:serviceFault>\n      </detail>\n    </soap:Fault>\n  </soap:Body>\n</soap:Envelope>\n",
+                    "cookie": [],
+                    "_postman_previewlanguage": "xml"
+                }
+            ],
+            "event": []
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "type": "any",
+            "value": "https://example.com",
+            "key": "PatientServiceSoapPortBaseUrl"
+        }
+    ],
+    "info": {
+        "_postman_id": "d260a3a5-de32-43fc-a73e-53d1313bfd1c",
+        "name": "PatientService",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": "version=1.1 - SOAP collection for veterinary clinic patient registry with CLIENT_ERROR (400) and SERVER_ERROR (500) SOAP Fault examples"
+    }
+}

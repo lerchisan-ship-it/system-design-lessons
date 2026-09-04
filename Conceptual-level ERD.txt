@@ -1,0 +1,86 @@
+Conceptual-level ERD
+
+Концептуальная модель описывает основные бизнес-сущности сервиса посуточной аренды автомобилей и отношения между ними без детализации атрибутов, ключей, типов данных и особенностей реализации в конкретной СУБД.
+
+Бизнес-сущности
+Пользователь — клиент сервиса аренды автомобилей.
+Профиль — персональные данные пользователя, необходимые для оформления аренды.
+Автомобиль — транспортное средство, доступное для сдачи в аренду.
+Аренда — факт передачи автомобиля пользователю на определённый период.
+ДТП — зафиксированный факт дорожно-транспортного происшествия, произошедшего в рамках аренды.
+Бизнес-связи
+Пользователь имеет Профиль.
+Пользователь совершает Аренду.
+Автомобиль участвует в Аренде.
+ДТП происходит в рамках Аренды.
+Conceptual ERD — Chen notation
+
+@startchen
+left to right direction
+
+entity "Пользователь" as User {
+}
+
+entity "Профиль" as Profile {
+}
+
+entity "Аренда" as Rental {
+}
+
+entity "Автомобиль" as Car {
+}
+
+entity "ДТП" as Accident {
+}
+
+relationship "имеет" as HasProfile {
+}
+
+relationship "участвует в" as ProfileParticipatesInRental {
+}
+
+relationship "участвует в" as CarParticipatesInRental {
+}
+
+relationship "происходит\nв рамках" as HappensWithinRental {
+}
+
+User -- HasProfile
+HasProfile -- Profile
+
+Profile -- ProfileParticipatesInRental
+ProfileParticipatesInRental -- Rental
+
+Car -- CarParticipatesInRental
+CarParticipatesInRental -- Rental
+
+Accident -- HappensWithinRental
+HappensWithinRental -- Rental
+
+@endchen
+
+@startuml
+left to right direction
+
+entity "Пользователь" as User
+entity "Профиль" as Profile
+entity "Аренда" as Rental
+entity "Автомобиль" as Car
+entity "ДТП" as Accident
+
+User ||--|| Profile : имеет
+
+Profile ||--o{ Rental : участвует в
+
+Car ||--o{ Rental : участвует в
+
+Rental ||--o| Accident : сопровождается
+
+@enduml
+
+Пояснение к модели
+
+Пользователь — Профиль.
+Пользователь может зарегистрироваться в системе без заполненного профиля. Для оформления аренды профиль должен быть создан и заполнен персональными данными пользователя. Для одного пользователя может существовать не более одного профиля.
+
+Пользователь — Аренда
