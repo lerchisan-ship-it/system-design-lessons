@@ -1,3 +1,6 @@
+# WSDL-контракт — PatientService
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 
 <wsdl:definitions
@@ -7,6 +10,13 @@
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:tns="http://example.com/vet/patients">
+
+    <wsdl:documentation>
+        Validation errors are returned as SOAP Fault with fault code
+        CLIENT_ERROR and HTTP status 400. Internal server errors are returned
+        as SOAP Fault with fault code SERVER_ERROR and HTTP status 500.
+        The SOAP faultcode value and the serviceFault/faultCode value must match.
+    </wsdl:documentation>
 
     <wsdl:types>
         <xs:schema
@@ -46,6 +56,13 @@
             <xs:simpleType name="UuidType">
                 <xs:restriction base="xs:string">
                     <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+                </xs:restriction>
+            </xs:simpleType>
+
+            <xs:simpleType name="FaultCodeType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CLIENT_ERROR"/>
+                    <xs:enumeration value="SERVER_ERROR"/>
                 </xs:restriction>
             </xs:simpleType>
 
@@ -123,6 +140,23 @@
                 </xs:complexType>
             </xs:element>
 
+            <xs:element name="serviceFault">
+                <xs:annotation>
+                    <xs:documentation>
+                        CLIENT_ERROR is used for validation errors (HTTP 400).
+                        SERVER_ERROR is used for internal server errors (HTTP 500).
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element
+                            name="faultCode"
+                            type="tns:FaultCodeType"/>
+                        <xs:element name="message" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
         </xs:schema>
     </wsdl:types>
 
@@ -142,15 +176,25 @@
         <wsdl:part name="parameters" element="tns:registerPatientResponse"/>
     </wsdl:message>
 
+    <wsdl:message name="ServiceFaultMessage">
+        <wsdl:part name="fault" element="tns:serviceFault"/>
+    </wsdl:message>
+
     <wsdl:portType name="PatientServicePortType">
         <wsdl:operation name="getPatients">
             <wsdl:input message="tns:GetPatientsInput"/>
             <wsdl:output message="tns:GetPatientsOutput"/>
+            <wsdl:fault
+                name="ServiceFault"
+                message="tns:ServiceFaultMessage"/>
         </wsdl:operation>
 
         <wsdl:operation name="registerPatient">
             <wsdl:input message="tns:RegisterPatientInput"/>
             <wsdl:output message="tns:RegisterPatientOutput"/>
+            <wsdl:fault
+                name="ServiceFault"
+                message="tns:ServiceFaultMessage"/>
         </wsdl:operation>
     </wsdl:portType>
 
@@ -171,6 +215,9 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="ServiceFault">
+                <soap:fault name="ServiceFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
 
         <wsdl:operation name="registerPatient">
@@ -182,6 +229,9 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault name="ServiceFault">
+                <soap:fault name="ServiceFault" use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
 
     </wsdl:binding>
@@ -196,3 +246,4 @@
     </wsdl:service>
 
 </wsdl:definitions>
+```
